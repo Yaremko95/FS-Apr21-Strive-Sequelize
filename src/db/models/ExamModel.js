@@ -2,7 +2,7 @@ import sequelize from "./index.js";
 import s from "sequelize";
 const { DataTypes } = s;
 
-const Student = sequelize.define("student", {
+const Exam = sequelize.define("exam", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -12,22 +12,10 @@ const Student = sequelize.define("student", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  surname: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  age: {
+  moduleId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    validate: {
-      min: 18,
-      msg: "Too young",
-    },
-  },
-  avatar: {
-    type: DataTypes.STRING,
     allowNull: false,
   },
 });
 
-export default Student;
+export default Exam;

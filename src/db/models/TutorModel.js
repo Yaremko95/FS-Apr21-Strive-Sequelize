@@ -19,6 +19,9 @@ const Tutor = sequelize.define("tutor", {
   expertise: {
     type: DataTypes.STRING,
     allowNull: true,
+    validate: {
+      isIn: [["FS", "FE", "BE"]],
+    },
   },
 });
 
