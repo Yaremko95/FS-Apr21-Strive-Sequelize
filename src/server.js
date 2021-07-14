@@ -1,5 +1,5 @@
 import express from "express";
-
+import db from "./db/index.js";
 import cors from "cors";
 
 const app = express();
@@ -10,6 +10,13 @@ app.use(cors());
 
 app.use(express.json());
 
-app.listen(port, () => console.log("🚀 Server is running on port ", port));
+db.sequelize
+  .sync({ force: true })
+  .then(() => {
+    app.listen(port, () => console.log("🚀 Server is running on port ", port));
 
-app.on("error", (error) => console.log("🚀 Server is crashed due to ", error));
+    app.on("error", (error) =>
+      console.log("🚀 Server is crashed due to ", error)
+    );
+  })
+  .catch((e) => console.log());
