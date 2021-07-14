@@ -1,5 +1,5 @@
 import { Router } from "express";
-
+import { Exam } from "../../db/index.js";
 const router = Router();
 
 router
@@ -13,6 +13,8 @@ router
   })
   .post(async (req, res, next) => {
     try {
+      const data = await Exam.create(req.body);
+      res.send(data);
     } catch (error) {
       console.log(error);
       next(error);

@@ -1,5 +1,5 @@
 import { Router } from "express";
-
+import { Tutor } from "../../db/index.js";
 const router = Router();
 
 router
@@ -13,6 +13,14 @@ router
   })
   .post(async (req, res, next) => {
     try {
+      const records = [
+        { name: "Riccardo", surname: "Gullin", expertise: "BE" },
+        { name: "Stefano", surname: "Casasola", expertise: "FE" },
+        { name: "Stefano", surname: "Miceli", expertise: "FE" },
+      ];
+
+      const data = await Tutor.bulkCreate(records);
+      res.send(data);
     } catch (error) {
       console.log(error);
       next(error);
