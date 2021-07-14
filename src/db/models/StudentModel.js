@@ -20,8 +20,10 @@ const Student = sequelize.define("student", {
     type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
-      min: 18,
-      msg: "Too young",
+      min: {
+        args: 18,
+        msg: "Too young",
+      },
     },
   },
   avatar: {

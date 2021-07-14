@@ -6,11 +6,17 @@ import Exam from "./models/ExamModel.js";
 
 Module.hasMany(Exam); // => moduleId
 Exam.belongsTo(Module);
-
-Student.beforeCreate((user) => {
-  if (!user.avatar) {
-    user.avatar = `https://${user.name}-${user.surname}`;
-  }
+Module.belongsToMany(Student, {
+  through: "student_module",
+  timestamps: false,
 });
 
-export default { sequelize, Student, Tutor, Module, Exam };
+Module.belongsToMany(Tutor, { through: "tutor_module", timestamps: false });
+
+Student.beforeValidate((user) => {
+  console.log({ user });
+  if (!user.avatar) {
+    user.avatar = `https://${user.name}-${user.surname}.png`;
+  }
+});
+export { sequelize, Student, Tutor, Module, Exam };
